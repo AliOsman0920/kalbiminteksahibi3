@@ -1,10 +1,101 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Kalbimin Tek Sahibi</title>
+<title>Kalbimin Tek Sahibi</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+font-family:Arial;
+background: linear-gradient(135deg, #ff4e8b, #8a2be2);
+overflow:hidden;
+color:white;
+}
+
+/* Cam efektli kutu */
+.card{
+background: rgba(255,255,255,0.1);
+padding:40px;
+border-radius:20px;
+backdrop-filter: blur(15px);
+box-shadow: 0 0 30px rgba(0,0,0,0.3);
+text-align:center;
+}
+
+/* Parlayan başlık */
+h1{
+font-size:40px;
+animation: glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{ text-shadow:0 0 10px white; }
+to{ text-shadow:0 0 25px #ffdde1; }
+}
+
+/* Kalpler */
+.heart{
+position:absolute;
+color:white;
+font-size:20px;
+animation: float 6s linear infinite;
+}
+
+@keyframes float{
+0%{ transform: translateY(100vh); opacity:1; }
+100%{ transform: translateY(-10vh); opacity:0; }
+}
+
+button{
+padding:10px 20px;
+border:none;
+border-radius:20px;
+background:white;
+color:#8a2be2;
+cursor:pointer;
+font-weight:bold;
+margin-top:15px;
+}
+</style>
 </head>
-<body style= "margin:0; height:100vh; display:flex; justify-content:center; align-items:center; flex-direction:column; font-family:Arial; background: linear-gradient(135deg, #ff4e8b, #8a2be2); color:white; text-align:center;">
-    <h1>Kalbimin Tek Sahibi 💖</h1>
-    <p>Bu site Ali Osman tarafından yapıldı 🔥</p>
+
+<body>
+
+<div class="card">
+<h1>Kalbimin Tek Sahibi 💖</h1>
+<p>Bu site Ali Osman tarafından sevgiyle yapıldı 🔥</p>
+<button onclick="playMusic()">Müziği Başlat 🎵</button>
+</div>
+
+<audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+<script>
+function playMusic(){
+document.getElementById("music").play();
+}
+
+/* Kalp oluşturma */
+function createHeart(){
+const heart=document.createElement("div");
+heart.classList.add("heart");
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=Math.random()*20+15+"px";
+heart.style.animationDuration=Math.random()*3+3+"s";
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},6000);
+}
+
+setInterval(createHeart,300);
+</script>
+
 </body>
 </html>
