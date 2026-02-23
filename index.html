@@ -1,54 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Kalbimin Tek Sahibi</title>
-
+<title>Kalbimin Tek Sahibi 💖</title>
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap');
+
 body{
 margin:0;
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-flex-direction:column;
-font-family:Arial;
+font-family:'Montserrat', sans-serif;
 background: linear-gradient(135deg, #ff4e8b, #8a2be2);
 overflow:hidden;
 color:white;
 }
 
-/* Cam efektli kutu */
-.card{
+/* Giriş kutusu */
+.login-box{
 background: rgba(255,255,255,0.1);
 padding:40px;
 border-radius:20px;
 backdrop-filter: blur(15px);
-box-shadow: 0 0 30px rgba(0,0,0,0.3);
 text-align:center;
+box-shadow:0 0 30px rgba(0,0,0,0.3);
 }
 
-/* Parlayan başlık */
-h1{
-font-size:40px;
-animation: glow 2s infinite alternate;
-}
-
-@keyframes glow{
-from{ text-shadow:0 0 10px white; }
-to{ text-shadow:0 0 25px #ffdde1; }
-}
-
-/* Kalpler */
-.heart{
-position:absolute;
-color:white;
-font-size:20px;
-animation: float 6s linear infinite;
-}
-
-@keyframes float{
-0%{ transform: translateY(100vh); opacity:1; }
-100%{ transform: translateY(-10vh); opacity:0; }
+input{
+padding:10px;
+border:none;
+border-radius:20px;
+text-align:center;
+margin-top:10px;
 }
 
 button{
@@ -61,40 +45,133 @@ cursor:pointer;
 font-weight:bold;
 margin-top:15px;
 }
-</style>
-</head>
 
-<body>
-
-<div class="card">
-<h1>Kalbimin Tek Sahibi 💖</h1>
-<p>Bu site Ali Osman tarafından sevgiyle yapıldı 🔥</p>
-<button onclick="playMusic()">Müziği Başlat 🎵</button>
-</div>
-
-<audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
-
-<script>
-function playMusic(){
-document.getElementById("music").play();
+/* Gizli içerik */
+#secretContent{
+display:none;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+text-align:center;
+position:relative;
 }
 
-/* Kalp oluşturma */
+/* Başlık animasyonu */
+h1{
+font-family: 'Great Vibes', cursive;
+font-size:60px;
+color:#ffdde1;
+text-shadow: 0 0 10px #ff4e8b, 0 0 20px #ff4e8b, 0 0 30px #8a2be2;
+animation: glow 2s infinite alternate;
+margin:0;
+}
+
+@keyframes glow{
+from{ text-shadow: 0 0 10px #ffdde1,0 0 20px #ff4e8b,0 0 30px #8a2be2; }
+to{ text-shadow: 0 0 25px #ffdde1,0 0 35px #ff4e8b,0 0 50px #8a2be2; }
+}
+
+p{
+font-size:28px;
+margin:10px 0;
+font-weight:700;
+text-shadow: 0 0 5px #ff4e8b;
+}
+
+#forever{
+margin-top:20px;
+font-size:36px;
+font-weight:700;
+color:#ffdee1;
+text-shadow:0 0 15px #8a2be2, 0 0 30px #ff4e8b;
+}
+
+/* Kalpler */
+.heart{
+position:absolute;
+color:#ffdde1;
+font-size:20px;
+animation: float 6s linear infinite;
+}
+
+@keyframes float{
+0%{ transform: translateY(100vh) rotate(0deg); opacity:1; }
+100%{ transform: translateY(-10vh) rotate(360deg); opacity:0; }
+}
+
+/* Yıldızlar */
+.star{
+position:absolute;
+color:white;
+font-size:2px;
+animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle{
+0%{ opacity:0.1; }
+50%{ opacity:0.8; }
+100%{ opacity:0.1; }
+}
+</style>
+</head>
+<body>
+
+<!-- Giriş ekranı -->
+<div class="login-box" id="loginBox">
+<h2>Bu site gizlidir 🔐</h2>
+<p>Şifreyi gir bakalım 😏</p>
+<input type="password" id="password" placeholder="Şifre">
+<br>
+<button onclick="checkPassword()">Giriş Yap</button>
+</div>
+
+<!-- Gizli içerik -->
+<div id="secretContent">
+<h1>Seni çok seviyorum bitanem 💖</h1>
+<p id="forever">Bir Ömür 🌟</p>
+</div>
+
+<script>
+// Şifre kontrolü
+function checkPassword(){
+var password=document.getElementById("password").value;
+if(password==="220607"){
+document.getElementById("loginBox").style.display="none";
+document.getElementById("secretContent").style.display="flex";
+startHearts();
+startStars();
+}else{
+alert("Yanlış şifre 😈");
+}
+}
+
+// Kalpler
 function createHeart(){
 const heart=document.createElement("div");
 heart.classList.add("heart");
 heart.innerHTML="❤️";
 heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=Math.random()*20+15+"px";
-heart.style.animationDuration=Math.random()*3+3+"s";
+heart.style.fontSize=Math.random()*20+25+"px";
+heart.style.animationDuration=(Math.random()*3+3)+"s";
 document.body.appendChild(heart);
-
-setTimeout(()=>{
-heart.remove();
-},6000);
+setTimeout(()=>{heart.remove();},6000);
 }
 
-setInterval(createHeart,300);
+function startHearts(){ setInterval(createHeart,200); }
+
+// Yıldızlar
+function createStar(){
+const star=document.createElement("div");
+star.classList.add("star");
+star.style.left=Math.random()*100+"vw";
+star.style.top=Math.random()*100+"vh";
+star.style.fontSize=Math.random()*3+1+"px";
+document.body.appendChild(star);
+setTimeout(()=>{star.remove();},4000);
+}
+
+function startStars(){ setInterval(createStar,100); }
 </script>
 
 </body>
